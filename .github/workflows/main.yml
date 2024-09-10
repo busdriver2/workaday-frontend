@@ -29,4 +29,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f matt1128jr/wordaday-frontend
       - name: Run Docker Container
-        run: docker run -d -p 5173:80 --name matt1128jr/wordaday-frontend  matt1128jr/wordaday-frontend
+        run: docker run -d -p 5173:80 --name wordaday-frontend-container  matt1128jr/wordaday-frontend
