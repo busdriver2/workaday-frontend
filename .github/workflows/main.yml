@@ -1,9 +1,9 @@
-name: Deploy BookStore-Frontend (GitHub Repository Name)
+name: Deploy workaday-frontend
 
 on: 
   push:
     branches:
-      - master (Branch where this repository is pushed previously)
+      - main
 
 jobs:
   build:
@@ -14,19 +14,19 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t sushantbagul/bookstore_frontend  . (Dockerhub Username/Repository Name . )
+        run: docker build -t matt1128jr/wordaday-frontend  .
 
 
       - name: Publish Image to docker hub
-        run: docker push sushantbagul/bookstore_frontend:latest (DockerHub Username/Repository Name:latest )
+        run: docker push matt1128jr/wordaday-frontend:latest
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull sushantbagul/bookstore_frontend:latest (DockerHub Username/Repository Name:latest )
+        run: docker pull matt1128jr/wordaday-frontend:latest
       - name: Delete old container
-        run: docker rm -f bookstore-frontend-container (Old Container Name if any/New container Name)
+        run: docker rm -f matt1128jr/wordaday-frontend
       - name: Run Docker Container
-        run: docker run -d -p 5173:80(Configured/Default Port:Configured/Default Port) --name bookstore-frontend-container (New Container Name) sushantbagul/bookstore_frontend (DockerHub Username/Repository Name)
+        run: docker run -d -p 5173:80 --name matt1128jr/wordaday-frontend  matt1128jr/wordaday-frontend
