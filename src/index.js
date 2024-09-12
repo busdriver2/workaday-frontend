@@ -5,7 +5,7 @@ import App from './App';
 import { WordContextProvider } from './context/WordContext'
 import { AuthContextProvider } from './context/AuthContext'
 import { UserContextProvider } from './context/UserContext';
-//.
+//
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
