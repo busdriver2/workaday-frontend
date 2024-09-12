@@ -1,5 +1,6 @@
 import { useWordsContext } from "../hooks/useWordsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import config from '../config'
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -7,14 +8,14 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 const WordDetails = ({ word }) => {
     const { dispatch } = useWordsContext()
     const { user } = useAuthContext()
-
+    const apiUrl = config.API_URL
     const handleClick = async () => {
         if (!user) {
             return
         }
 
 
-        const response = await fetch('/api/words/' + word._id, {
+        const response = await fetch(apiUrl + '/api/words/' + word._id, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`

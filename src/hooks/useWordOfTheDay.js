@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { useAuthContext } from '../hooks/useAuthContext'
+import config from '../config'
 
 export const useWordOfTheDay = () => {
     const [isLoading, setisLoading] = useState(null)
@@ -12,11 +13,12 @@ export const useWordOfTheDay = () => {
     const [status, setStatus] = useState(null)
     
     const { user }= useAuthContext()
+    const apiUrl = config.API_URL
 
     const fetchRandomWord = async () => {
         setisLoading(true)
         setError(null)
-        const response = await fetch('/api/words/wordOfTheDay', {
+        const response = await fetch(apiUrl + '/api/words/wordOfTheDay', {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
@@ -41,7 +43,7 @@ export const useWordOfTheDay = () => {
             setError(json.error)
             return
         }
-        const response2 = await fetch('/api/words/' + json.wordId, {
+        const response2 = await fetch(apiUrl + '/api/words/' + json.wordId, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',

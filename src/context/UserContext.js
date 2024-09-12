@@ -1,15 +1,18 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import config from '../config'
+
 // Create a UserContext
 export const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
     const [User, setUser] = useState(null);
     const { user } = useAuthContext()
+    const apiUrl = config.API_URL
     useEffect(() => {
         const fetchUserPoints = async () => {
           if (user) {
-            const response = await fetch(`/api/user/${user.email}`);
+            const response = await fetch(`${apiUrl}/api/user/${user.email}`);
             const json = await response.json();
             if (response.ok) {
               setUser(json);  // Set the user data including points

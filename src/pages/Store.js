@@ -2,16 +2,18 @@ import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import PackDetails from "../components/PackDetails"
 import '../store.css'; // Import your CSS file
+import config from '../config'
 
 const Store = () => {
     const { user } = useAuthContext()
     const [packs, setPacks] = useState([])
     const [error, setError] = useState(null)
+    const apiUrl = config.API_URL
 
     useEffect(() => {
         const fetchPacks = async () => {
             try {
-                const response = await fetch('/api/packs', {
+                const response = await fetch(apiUrl + '/api/packs', {
                     headers: {
                         'Authorization': `Bearer ${user.token}`
                     }

@@ -2,18 +2,21 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext'
 import '../packSelection.css'
+import config from '../config'
+
 
 const FreePackSelection = () => {
     const [selectedPack, setSelectedPack] = useState(null);
     const [error, setError] = useState(null);
     const {user} = useAuthContext()
     const navigate = useNavigate();
-    
+    const apiUrl = config.API_URL
+
     const handlePackSelection = async () => {
         //console.log(user)
         try {
 
-            const response = await fetch('/api/packs/select-pack', {
+            const response = await fetch(apiUrl + '/api/packs/select-pack', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',

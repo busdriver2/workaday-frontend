@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useWordsContext } from "../hooks/useWordsContext"
 import { useAuthContext } from '../hooks/useAuthContext'
 
+import config from '../config'
 
 
 const WordForm = () => {
@@ -13,7 +14,8 @@ const WordForm = () => {
     const [definition, setDefinition] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFIelds] = useState([])
-
+    const apiUrl = config.API_URL
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -24,7 +26,7 @@ const WordForm = () => {
 
         const word = {id, name, definition}
 
-        const response = await fetch('/api/words', {
+        const response = await fetch(apiUrl + '/api/words', {
             method: 'POST',
             body: JSON.stringify(word),
             headers: {

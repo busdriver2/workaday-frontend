@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { useWordOfTheDay } from '../hooks/useWordOfTheDay'
 import { useUserContext } from '../hooks/useUserContext'
 import Timer from './Timer'
+import config from '../config'
 
 
 const WordOfTheDay = () => {
@@ -13,10 +14,11 @@ const WordOfTheDay = () => {
     const { fetchRandomWord, word, error, wordId, userId, definition, status, isLoading } = useWordOfTheDay()
     const [WordStatus, setWordStatus] = useState(status)
     const { User, updateUserPoints } = useUserContext()
-    
+    const apiUrl = config.API_URL
+
     const updateWordBank = async (action) => {
         const body = {userId, wordId, action}
-        const response = await fetch('/api/words/updateWordBank', {
+        const response = await fetch(apiUrl + '/api/words/updateWordBank', {
             method: 'POST',
             body: JSON.stringify(body)
             ,
@@ -34,7 +36,7 @@ const WordOfTheDay = () => {
 
     const givePoints = async () => {
         console.log("POINTS FOR USER:" + User)
-        const response = await fetch('/api/user/give/5', {
+        const response = await fetch(apiUrl + '/api/user/give/5', {
             method: 'POST',
             body: JSON.stringify(user)
             ,

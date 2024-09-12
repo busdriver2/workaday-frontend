@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useWordsContext } from "../hooks/useWordsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import config from '../config'
 
 
 // components
@@ -12,10 +13,11 @@ import WordOfTheDay from '../components/WordOfTheDay'
 const Home = () => {
     const {words, dispatch} = useWordsContext()
     const {user} = useAuthContext()
+    const apiUrl = config.API_URL
 
     useEffect(() => {
         const fetchWords = async () => {
-            const response = await fetch('/api/words', {
+            const response = await fetch(apiUrl + '/api/words', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }

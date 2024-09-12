@@ -2,18 +2,21 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import useUserData from "../hooks/useUserData"
 import { useUserContext } from "../hooks/useUserContext"
 import '../packDetails.css'; // Import your CSS file
+import config from '../config'
+
 
 const PackDetails = ({ pack, onError }) => {
     const { user } = useAuthContext()
     const { fetchUserData } = useUserData()
     const { updateUserCoins } = useUserContext()
+    const apiUrl = config.API_URL
 
     const handleClick = async () => {
         if (!user) {
             return
         }
         try {
-            const response = await fetch('/api/packs/purchase/' + pack._id, {
+            const response = await fetch(apiUrl + '/api/packs/purchase/' + pack._id, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${user.token}`

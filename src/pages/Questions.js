@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../initialTest.css';
+import config from '../config'
 
 const InitialTest = () => {
   const [questions, setQuestions] = useState([]);
@@ -11,10 +12,11 @@ const InitialTest = () => {
   const [answers, setAnswers] = useState([]);
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const apiUrl = config.API_URL
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const response = await fetch('/api/test/questions', {
+      const response = await fetch(apiUrl + '/api/test/questions', {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -41,7 +43,7 @@ const InitialTest = () => {
       },
       body: JSON.stringify(answers)
     };
-    const response = await fetch('/api/test/submit/' + user.email, config);
+    const response = await fetch(apiUrl + '/api/test/submit/' + user.email, config);
     const json = await response.json();
     toast.success(`Your vocabulary level is: ${json.userLevel}`);
     setTimeout(() => {
