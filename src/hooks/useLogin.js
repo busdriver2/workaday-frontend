@@ -11,7 +11,7 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/user/login', {
+        const response = await fetch('http://3.142.47.202:5555/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
@@ -25,7 +25,7 @@ export const useLogin = () => {
         if (response.ok) {
             const userData = JSON.stringify(json)
             
-            const response = await fetch(`/api/user/${email}`)
+            const response = await fetch(`http://3.142.47.202:5555/api/user/${email}`)
             const userObject = await response.json()
             if (!response.ok) {
                 console.log("ERROR FETCHING USER")
