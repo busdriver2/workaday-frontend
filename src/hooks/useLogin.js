@@ -6,12 +6,13 @@ export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch }= useAuthContext()
     const { User, setUser } = useUserContext()
+    const backend_url = process.env.BACKEND_URL
 
     const login = async (email, password) => {
         setIsLoading(true)
         setError(null)
         //HArdcoded
-        const response = await fetch('http://3.142.47.202:5555/api/user/login', {
+        const response = await fetch(`${backend_url}/api/user/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
@@ -25,7 +26,7 @@ export const useLogin = () => {
         if (response.ok) {
             const userData = JSON.stringify(json)
             
-            const response = await fetch(`http://3.142.47.202:5555/api/user/${email}`)
+            const response = await fetch(`${backend_url}/api/user/${email}`)
             const userObject = await response.json()
             if (!response.ok) {
                 console.log("ERROR FETCHING USER")
