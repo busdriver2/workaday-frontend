@@ -1,19 +1,22 @@
 import { useAuthContext } from './useAuthContext'
 import { useState } from 'react'
 import { useUserContext } from './useUserContext'
+import config from '../config'
+
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch }= useAuthContext()
     const { User, setUser } = useUserContext()
-    const backend_url = process.env.BACKEND_URL
+
+    const apiUrl = config.API_URL
 
     const login = async (email, password) => {
         setIsLoading(true)
         setError(null)
         //HArdcoded
-        console.log(backend_url)
-        const response = await fetch(backend_url + '/api/user/login', {
+        console.log(apiUrl)
+        const response = await fetch(apiUrl + '/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
@@ -27,7 +30,7 @@ export const useLogin = () => {
         if (response.ok) {
             const userData = JSON.stringify(json)
             
-            const response = await fetch(`${backend_url}/api/user/${email}`)
+            const response = await fetch(`${apiUrl}/api/user/${email}`)
             const userObject = await response.json()
             if (!response.ok) {
                 console.log("ERROR FETCHING USER")
