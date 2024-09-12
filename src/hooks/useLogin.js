@@ -12,7 +12,8 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
         //HArdcoded
-        const response = await fetch(`${backend_url}/api/user/login`, {
+        console.log(backend_url)
+        const response = await fetch(backend_url + '/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
