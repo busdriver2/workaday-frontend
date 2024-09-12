@@ -10,7 +10,7 @@ export const useLogin = () => {
     const login = async (email, password) => {
         setIsLoading(true)
         setError(null)
-
+        //HArdcoded
         const response = await fetch('http://3.142.47.202:5555/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
