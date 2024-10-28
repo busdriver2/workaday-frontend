@@ -9,7 +9,6 @@ import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import Store from './pages/Store'
 import Questions from './pages/Questions'
-import Entry from './pages/Entry'
 import FreePackSelection from './components/FreePackSelection'
 
 function App() {
@@ -28,7 +27,7 @@ function MainContent({ user }) {
   const location = useLocation(); // Now it's inside the Router
 
   // List of paths where the Navbar should not be shown
-  const noNavbarPaths = ['/test', '/signup', '/login', '/entry'];
+  const noNavbarPaths = ['/test', '/signup', '/login'];
 
   return (
     <>
@@ -38,7 +37,7 @@ function MainContent({ user }) {
         <Routes>
           <Route
             path='/'
-            element={user ? <Home /> : <Navigate to="/entry" />}
+            element={user ? <Home /> : <Navigate to="/login" />}
           />
 
           <Route
@@ -69,11 +68,6 @@ function MainContent({ user }) {
           <Route
             path='/select-pack' 
             element={user ? <FreePackSelection /> : <Navigate to="/login" />} 
-          />
-
-          <Route
-            path='/entry'
-            element={<Entry/>}
           />
 
         </Routes>
