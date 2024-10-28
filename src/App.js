@@ -11,7 +11,6 @@ import Store from './pages/Store'
 import Questions from './pages/Questions'
 import Entry from './pages/Entry'
 import FreePackSelection from './components/FreePackSelection'
-import './index.css';
 
 function App() {
   const { user } = useAuthContext()
