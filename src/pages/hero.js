@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -13,7 +14,7 @@ const navigation = [
 
 export default function Hero() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+    const navigate = useNavigate()
 
     const handleClick = () => {
     navigate('/signup')
